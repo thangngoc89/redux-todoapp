@@ -9,3 +9,25 @@ dev:
         code: |
           npm -v
           node -v
+
+build:
+  steps:
+    - npm-install
+    - script:
+        name: Build project
+        code: |
+          npm run build
+          cp index.html dist/
+
+    - script:
+        name: Copy dist to output folder
+        code: |
+          cp -a dist/ $WERCKER_OUTPUT_DIR
+
+deploy:
+  steps:
+    - uetchy/gh-pages
+        token: $GITHUB_TOKEN
+        repo: thangngoc89/todoapp
+        #domain: randompaper.co
+        path: dist
