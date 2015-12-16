@@ -1,0 +1,11 @@
+box: nodesource/trusty:5.1.1
+dev:
+  steps:
+    - script:
+        name: SET ENV_VARS
+        code: |
+          export NODE_ENV=development
+    - internal/shell:
+        code: |
+          npm -v
+          node -v
